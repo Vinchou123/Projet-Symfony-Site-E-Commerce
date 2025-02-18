@@ -1,20 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ECommerceWebController!{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Nos Produits</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/vince/e-commerce_web/src/Controller/ECommerceWebController.php</code></li>
-        <li>Your template at <code>C:/Users/vince/e-commerce_web/templates/e_commerce_web/index.html.twig</code></li>
-    </ul>
-</div>
+    <div class="product-list">
+        {% for product in products %}
+            <div class="product">
+                <h2>{{ product.title }}</h2>
+                <p>{{ product.description }}</p>
+                <p>Prix : {{ product.price }} €</p>
+                <div class="category">
+                    <img src="{{ product.category.image }}" alt="{{ product.category.name }}">
+                    <span>{{ product.category.name }}</span>
+                </div>
+                <div class="images">
+                    {% for image in product.images %}
+                        <img src="{{ image }}" alt="{{ product.title }}">
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <p>Aucun produit disponible.</p>
+        {% endfor %}
+    </div>
 {% endblock %}
